@@ -1,0 +1,248 @@
+const welcome = document.getElementById("welcome");
+const music = document.getElementById("music");
+const memory = document.getElementById("memory");
+const letter = document.getElementById("letter");
+const cake = document.getElementById("cake");
+
+
+const photo = document.getElementById("photo");
+const caption = document.getElementById("caption");
+
+
+
+function show(section){
+
+    document.querySelectorAll(".page")
+    .forEach(page => {
+
+        page.classList.add("hidden");
+
+    });
+
+
+    section.classList.remove("hidden");
+
+}
+
+
+
+
+// Opening button
+
+function startSurprise(){
+
+    show(music);
+
+
+}
+
+
+
+
+
+// Continue to memories
+
+function startMemory(){
+
+    show(memory);
+
+    startSlideshow();
+
+}
+
+
+
+
+
+// Photos
+
+const memories = [
+
+    {
+        img:"images/cafe.jpg",
+        text:"A beautiful memory ☕✨"
+    },
+
+    {
+        img:"images/holi.jpg",
+        text:"A colorful memory 🌈"
+    },
+
+    {
+        img:"images/group.jpg",
+        text:"A special moment 💗"
+    },
+
+    {
+        img:"images/college.jpg",
+        text:"Memories worth keeping 🎓✨"
+    }
+
+];
+
+
+
+let index = 0;
+
+
+
+function startSlideshow(){
+
+
+index = 0;
+
+changePhoto();
+
+let timer = setInterval(() => {
+
+
+
+        index++;
+
+
+if(index >= memories.length){
+
+    clearInterval(timer);
+
+
+show(letter);
+
+setTimeout(() => {
+    typeMessage();
+}, 500);
+
+    return;
+
+}
+
+
+        changePhoto();
+
+
+    },5000);
+
+
+}
+
+
+
+
+function changePhoto(){
+
+
+    photo.style.opacity = 0;
+
+
+    setTimeout(()=>{
+
+
+        photo.src = memories[index].img;
+
+        caption.innerHTML =
+        memories[index].text;
+
+
+        photo.style.opacity = 1;
+
+
+    },800);
+
+
+
+}
+
+
+
+
+
+// Celebration
+
+function celebrate(){
+
+    show(cake);
+
+
+    document.body.style.background =
+    "linear-gradient(135deg,#ff69b4,#ffd1e8)";
+
+}
+const message = `I don't say this enough, but having you in my life means a lot
+
+You are so special and a wonderful person.
+
+You are soooo kind, generous, altruistic, charming, genuine girl and yeah also so much precious hehe and so on..
+
+iam not an nerd or smt or else I would have written some paragraphs about how amazing you are..
+
+On your birthday. I just want you to know that you are irreplaceable
+
+I hope this year brings you everything you deserve
+and dont forget that you deserve the best always
+
+May every day bring you a reason to smile
+
+I hope you are always as happy as you make the people around you`;
+
+
+let typingTimer;
+function typeMessage(){
+
+    clearInterval(typingTimer);
+
+    let i = 0;
+
+    const box = document.getElementById("typingText");
+
+    box.innerHTML = "";
+
+    typingTimer = setInterval(() => {
+
+        box.innerHTML += message.charAt(i);
+
+        i++;
+
+if(i >= message.length){
+
+    clearInterval(typingTimer);
+
+    setTimeout(() => {
+
+        document.getElementById("surpriseBtn")
+        .classList.remove("hidden");
+
+    },1000);
+
+}
+
+    }, 50);
+
+}
+function blowCandles(){
+  document.body.classList.add("night-sky");
+document.getElementById("finalMessage").classList.add("hidden");
+
+    document.getElementById("cakeBox").textContent = "🎂";
+
+    document.getElementById("candleBtn").style.display = "none";
+
+    setTimeout(() => {
+    document.getElementById("finalMessage").classList.remove("hidden");
+}, 3500);
+
+
+}
+
+function showCake(){
+
+    show(cake);
+
+}
+function exitSurprise(){
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.add("hidden");
+    });
+
+    const exitScreen = document.getElementById("exitScreen");
+    exitScreen.classList.remove("hidden");
+    exitScreen.classList.add("show");
+}
